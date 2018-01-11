@@ -1,17 +1,17 @@
-package controllers
+package router
 
 import (
 	"github.com/astaxie/beego"
 )
 
 // Operations about object
-type TestController struct {
+type IndexController struct {
 	beego.Controller
 }
 
-func (o *TestController) Hello() {
+func (o *IndexController) Index() {
 	result := map[string]string{
-		"version": "v1.0.0",
+		"version": beego.AppConfig.String("version"),
 	}
 	result["data"] = "You can fly with beego!"
 	o.Data["json"] = result

@@ -9,7 +9,7 @@ package routers
 
 import (
 	"beego-api-demo/controllers"
-
+	"beego-api-demo/controllers/router"
 	"github.com/astaxie/beego"
 )
 
@@ -28,5 +28,5 @@ func init() {
 	)
 	beego.AddNamespace(ns)
 
-	beego.Router("/test/hello", &controllers.TestController{}, "get:Hello")
+	beego.Router("/", &router.IndexController{}, "*:Index")
 }
