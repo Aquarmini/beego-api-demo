@@ -52,3 +52,25 @@ func TestRouterIndexTime(t *testing.T) {
 		})
 	})
 }
+
+func TestRouterIndexParseFormAction(t *testing.T) {
+	r, _ := http.NewRequest("GET", "/router/parse/form?id=2&name=limx", nil)
+	w := httptest.NewRecorder()
+	beego.BeeApp.Handlers.ServeHTTP(w, r)
+
+	Convey("Subject: 测试时间戳", t, func() {
+		Convey("HTTP状态码应为200", func() {
+			So(w.Code, ShouldEqual, 200)
+		})
+		Convey("返回数据不能为空", func() {
+			So(w.Body.Len(), ShouldBeGreaterThan, 0)
+		})
+		Convey("返回数据Id=2，Name=limx", func() {
+			var data map[string]interface{}
+			if err := json.Unmarshal([]byte(w.Body.String()), &data); err == nil {
+				So(data["id"], ShouldEqual, 2)
+				So(data["name"], ShouldEqual, "limx")
+			}
+		})
+	})
+}

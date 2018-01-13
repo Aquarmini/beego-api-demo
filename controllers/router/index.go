@@ -3,6 +3,7 @@ package router
 import (
 	"github.com/astaxie/beego"
 	"time"
+	"beego-api-demo/dto"
 )
 
 // Operations about object
@@ -25,5 +26,19 @@ func (o *IndexController) Time() {
 		"time": t.Unix(),
 	}
 	o.Data["json"] = result
+	o.ServeJSON()
+}
+
+func (o *IndexController) ParseFormAction() {
+	dto := dto.PostForm{}
+	if err := o.ParseForm(&dto); err != nil {
+		//handle error
+	}
+
+	//result, _ := json.Marshal(dto)
+	o.Data["json"] = map[string]interface{}{
+		"id":   dto.Id,
+		"name": dto.Name,
+	}
 	o.ServeJSON()
 }

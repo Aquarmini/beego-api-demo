@@ -32,4 +32,6 @@ func init() {
 	beego.Router("/", &router.IndexController{}, "*:Index")
 	// 返回当前时间戳
 	beego.Router("/router/time", &router.IndexController{}, "*:Time")
+	// 测试ParseForm方法
+	beego.Router("/router/parse/form", &router.IndexController{}, "*:ParseFormAction")
 }
