@@ -2,6 +2,7 @@ package router
 
 import (
 	"github.com/astaxie/beego"
+	"time"
 )
 
 // Operations about object
@@ -14,6 +15,15 @@ func (o *IndexController) Index() {
 		"version": beego.AppConfig.String("version"),
 	}
 	result["data"] = "You can fly with beego!"
+	o.Data["json"] = result
+	o.ServeJSON()
+}
+
+func (o *IndexController) Time() {
+	t := time.Now()
+	result := map[string]int64{
+		"time": t.Unix(),
+	}
 	o.Data["json"] = result
 	o.ServeJSON()
 }

@@ -28,5 +28,8 @@ func init() {
 	)
 	beego.AddNamespace(ns)
 
+	// 路由基本使用，返回版本号
 	beego.Router("/", &router.IndexController{}, "*:Index")
+	// 返回当前时间戳
+	beego.Router("/router/time", &router.IndexController{}, "*:Time")
 }
