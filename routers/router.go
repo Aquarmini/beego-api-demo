@@ -11,6 +11,8 @@ import (
 	"beego-api-demo/controllers"
 	"beego-api-demo/controllers/router"
 	"github.com/astaxie/beego"
+	filterController "beego-api-demo/controllers/filter"
+	"beego-api-demo/filter"
 )
 
 func init() {
@@ -28,10 +30,14 @@ func init() {
 	)
 	beego.AddNamespace(ns)
 
+	filter.Register()
+
 	// 路由基本使用，返回版本号
 	beego.Router("/", &router.IndexController{}, "*:Index")
 	// 返回当前时间戳
 	beego.Router("/router/time", &router.IndexController{}, "*:Time")
 	// 测试ParseForm方法
 	beego.Router("/router/parse/form", &router.IndexController{}, "*:ParseFormAction")
+	// 测试Filter过滤器
+	beego.Router("/filter/index", &filterController.IndexController{}, "*:Index")
 }
